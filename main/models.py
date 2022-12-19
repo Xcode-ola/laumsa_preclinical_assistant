@@ -27,6 +27,7 @@ class Chapters(models.Model):
 class Summary(models.Model):
     course = models.ForeignKey(Courses, related_name="summary", on_delete=models.CASCADE)
     chapter = models.ForeignKey(Chapters, related_name="summary", on_delete=models.CASCADE)
+    created_at = models.DateField(auto_now=True)
     body = RichTextField()
     isverified = models.BooleanField(default=False)
 

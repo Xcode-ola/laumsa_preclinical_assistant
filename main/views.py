@@ -17,3 +17,10 @@ class Chapter_List_View(APIView):
         chapters = Chapters.objects.filter(course__name = kwargs["name"])
         serializer = ChapterPageSerializer(chapters, many=True)
         return Response(serializer.data)
+
+class Summary_View(APIView):
+    permission_classes = [permissions.AllowAny]
+    def get(self, request, format=None, **kwargs):
+        chapters = Chapters.objects.filter(course__name = kwargs["course"]).filter(chapter__name = kwargs["chapter"]).first()
+        serializer = ChapterPageSerializer(chapters, many=True)
+        return Response(serializer.data)
